@@ -1,124 +1,203 @@
-#include <iostream>
-#include "vector2.hpp"
+﻿#include <iostream>
 #include <cassert>
-
-using namespace CPL;
-
-#pragma region MyRegion
-//void v1_must_equal_to_v2() 
-//{
-//	Vector2f v1(10, 10);
-//	Vector2f v2;
-//	v2 = v1;
-//	assert(v1.x == v2.x && v1.y == v2.y);
-//}
-//
-//void t_copy_constructor()
-//{
-//	Vector2f v1(10, 10);
-//	Vector2f v2(v1);
-//	assert(v1.x == v2.x && v1.y == v2.y);
-//}
-//
-//void t_v1_plus_v2()
-//{
-//	Vector2f v1(10, 10);
-//	Vector2f v2(20, 20);
-//	Vector2f v3;
-//	v3 = v1 + v2;
-//	assert(v3.x == 30 && v3.y == 30);
-//}
-//
-//void t_v1_plus_equal_v2()
-//{
-//	Vector2f v1(10, 15);
-//	Vector2f v2(20, 25);
-//	Vector2f v3;
-//	v1 += v2;
-//	assert(v1.x == 30 && v1.y == 40);
-//}
-//
-//
-//int main() 
-//{
-//	v1_must_equal_to_v2();
-//	t_copy_constructor();
-//	t_v1_plus_v2();
-//
-//	Vector2<float>::ones(); 
-//	Vector2<float>::zeros();
-//	Vector2<float>::up();
-//
-//	return 0;
-//}
-#pragma endregion
-
+#include "vector2.hpp"
+#include "vector3.hpp"
+#include "Matrix4.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-int main(void)
-{
-    GLFWwindow* window;
+using namespace CPL;
 
-    /* Initialize the library */
+// ───────────────────────────────────────────
+GLFWwindow* init_window(int w, int h)
+{
     if (!glfwInit())
-        return -1;
+        return nullptr;
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
 
+    GLFWwindow* win = glfwCreateWindow(w, h, "CPL", nullptr, nullptr);
+    if (!win) { glfwTerminate(); return nullptr; }
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(800, 600, "CPL", NULL, NULL);
-    if (!window)
-    {
+    glfwMakeContextCurrent(win);
+
+    if (glewInit() != GLEW_OK) {
+        std::cout << "Failed to init GLEW\n";
         glfwTerminate();
-        return -1;
+        return nullptr;
     }
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    if (glewInit() != GLEW_OK)
-    {
-        std::cout << "Failed to initialize GLEW" << std::endl;
-        return-1;
-    }
-
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, w, h);
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-2.0, 2.0, -1.5, 1.5, -1.0, 1.0);
 
-    /* Loop until the user closes the window */
+    return win;
+}
+
+#pragma region Vector 2
+
+// ───────────────────────────────────────────
+
+void t_angle()
+{
+    Vector2f right(1, 0);
+    Vector2f up = Vector2f::up();
+
+    assert(std::abs(right.angle()) < 1e-6);
+
+    assert(std::abs(up.angle() - 1.570796f) < 1e-4);
+
+    assert(std::abs(right.angleBetween(up) - 1.570796f) < 1e-4);
+
+    std::cout << "[Vector2] Angle tests done\n";
+
+}
+
+void t_dot_and_cross()
+{
+    Vector2f a(3, 4);
+    Vector2f b(1, 0);
+
+    assert(a.dot(b) == 3);
+    assert(a.cross(b) == -4);
+    std::cout << "[Vector2] Dot and Cross tests done\n";
+
+}
+
+void t_length_and_normalize()
+{
+    Vector2f v(3, 4);
+    assert(v.length() == 5);
+    assert(v.lengthSquared() == 25);
+
+    Vector2f unit = v.normalized();
+    float len = unit.length();
+    assert(std::abs(len - 1.0f) < 1e-5);
+
+    v.normalize();
+    assert(std::abs(v.length() - 1.0f) < 1e-5);
+    std::cout << "[Vector2] Length and Normalize tests done\n";
+
+}
+
+void run_vector2_tests()
+{
+    Vector2f v1(10, 10);
+    Vector2f v2;
+    v2 = v1;
+    assert(v1 == v2);
+
+    Vector2f v3(v1);
+    assert(v3 == v1);
+
+    Vector2f v4 = v1 + Vector2f(5, 5);
+    assert(v4 == Vector2f(15, 15));
+
+    v4 += Vector2f(5, 5);
+    assert(v4 == Vector2f(20, 20));
+
+    Vector2f v5 = v4 * 0.5f;
+    assert(v5 == Vector2f(10, 10));
+
+    assert(Vector2f::ones() == Vector2f(1, 1));
+    assert(Vector2f::zeros() == Vector2f(0, 0));
+    assert(Vector2f::up() == Vector2f(0, 1));
+
+    std::cout << "[Vector2] Tests done\n";
+
+    t_angle();
+    t_dot_and_cross();
+    t_length_and_normalize();
+}
+
+#pragma endregion
+
+#pragma region Vecyot 3
+
+void run_vector3_tests()
+{
+    Vector3f a(1, 0, 0), b(0, 1, 0);
+
+    assert(a.cross(b) == Vector3f(0, 0, 1));
+    assert(a.dot(b) == 0);
+
+    Vector3f c(3, 4, 0);
+    assert(c.length() == 5);
+    assert(c.normalized().length() - 1.0f < 1e-5);
+
+    Vector3f d = Vector3f::up();
+    assert(d == Vector3f(0, 1, 0));
+
+    std::cout << "[Vector3] Tests done\n";
+}
+
+#pragma endregion
+
+#pragma region Matrix4
+void run_matrix4_projection_tests()
+{
+    using namespace CPL;
+    Matrix4f proj = Matrix4f::perspective(3.14159f / 2, 16 / 9.f, 0.1f, 100.f);
+    Vector3f p(0, 0, -0.1f);
+    Vector3f clip = proj * p;
+    assert(std::abs(clip.z + 1) < 1e-3);
+    std::cout << "[Matrix4] projection test passed\n";
+}
+
+void run_matrix4_tests()
+{
+    using namespace CPL;
+    Matrix4f mTranslate = Matrix4f::translate(5, 0, 0);
+    Vector3f p(1, 0, 0);
+    Vector3f moved = mTranslate * p;
+    assert(moved == Vector3f(6, 0, 0));
+
+    Matrix4f mScale = Matrix4f::scale(2, 2, 2);
+    assert((mScale * p) == Vector3f(2, 0, 0));
+
+    Matrix4f mRot = Matrix4f::rotateZ(3.14159265f / 2);
+    Vector3f up = mRot * Vector3f(1, 0, 0);
+    assert(std::abs(up.x) < 1e-4 && std::abs(up.y - 1) < 1e-4);
+
+    std::cout << "[Matrix4] basic tests passed\n";
+
+    run_matrix4_projection_tests();
+}
+
+#pragma endregion
+
+
+// ───────────────────────────────────────────
+int main()
+{
+    run_vector2_tests();
+
+    run_vector3_tests();
+
+    run_matrix4_tests();
+
+    GLFWwindow* window = init_window(800, 600);
+    if (!window) return -1;
+
     while (!glfwWindowShouldClose(window))
     {
-
-
-        glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
 
-		glBegin(GL_TRIANGLES);
-		    glColor3f(1.0f, 0.0f, 0.0f);
-		    glVertex3f(0.0f, 0.0f, 0.0f);
+        glBegin(GL_TRIANGLES);
+        glColor3f(1.0f, 0.0f, 0.0f);  glVertex3f(0.0f, 0.0f, 0.0f);
+        glColor3f(0.0f, 1.0f, 0.0f);  glVertex3f(0.0f, 1.0f, 0.0f);
+        glColor3f(0.0f, 0.0f, 1.0f);  glVertex3f(1.0f, 1.0f, 0.0f);
+        glEnd();
 
-		    glColor3f(0.0f, 1.0f, 0.0f);
-            glVertex3f(0.0f, 1.0f, 0.0f);
-
-            glColor3f(0.0f, 0.0f, 1.0f);
-            glVertex3f(1.0f, 1.0f, 0.0f);
-
-		glEnd();
-
-        /* Swap front and back buffers */
         glfwSwapBuffers(window);
-
-        /* Poll for and process events */
         glfwPollEvents();
     }
 
