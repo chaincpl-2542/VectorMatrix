@@ -11,6 +11,15 @@ namespace CPL
         std::array<T, 16> m{};
 
     public:
+        T* data() {
+            return m.data();
+        }
+
+        const T* data() const {
+            return m.data();
+        }
+
+
         Matrix4() { loadIdentity(); }
 
         Matrix4(std::initializer_list<T> list)

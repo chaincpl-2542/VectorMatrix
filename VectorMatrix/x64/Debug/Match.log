@@ -1,4 +1,9 @@
 ﻿  main.cpp
+D:\GitHub\VectorMatrix\main.cpp(212,35): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+D:\GitHub\VectorMatrix\main.cpp(212,35): warning C4244:         with
+D:\GitHub\VectorMatrix\main.cpp(212,35): warning C4244:         [
+D:\GitHub\VectorMatrix\main.cpp(212,35): warning C4244:             T=float
+D:\GitHub\VectorMatrix\main.cpp(212,35): warning C4244:         ]
   vector2.cpp
   Vector3.cpp
   Generating Code...

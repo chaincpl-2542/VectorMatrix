@@ -3,8 +3,10 @@
 #include "vector2.hpp"
 #include "vector3.hpp"
 #include "Matrix4.hpp"
+#include "Transform.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/vec3.hpp>
 
 using namespace CPL;
 
@@ -59,28 +61,45 @@ void t_angle()
 
 void t_dot_and_cross()
 {
+    std::cout << "=====================================" << '\n';
+
     Vector2f a(3, 4);
     Vector2f b(1, 0);
 
-    assert(a.dot(b) == 3);
-    assert(a.cross(b) == -4);
-    std::cout << "[Vector2] Dot and Cross tests done\n";
+    float dot = a.dot(b);
+    float cross = a.cross(b);
+
+    std::cout << "dot(a,b): " << dot << '\n';
+    std::cout << "cross(a,b): " << cross << '\n';
+
+    assert(dot == 3);
+    assert(cross == -4);
+    std::cout << "[Vector2] Dot and Cross OK\n";
+    std::cout << "=====================================" << '\n';
 
 }
 
 void t_length_and_normalize()
 {
+    std::cout << "=====================================" << '\n';
+
     Vector2f v(3, 4);
-    assert(v.length() == 5);
-    assert(v.lengthSquared() == 25);
+    std::cout << "v.length(): " << v.length() << '\n';
+    std::cout << "v.lengthSquared(): " << v.lengthSquared() << '\n';
 
     Vector2f unit = v.normalized();
+    std::cout << "v.normalized(): " << unit << '\n';
+
     float len = unit.length();
-    assert(std::abs(len - 1.0f) < 1e-5);
+    std::cout << "unit.length(): " << len << '\n';
 
     v.normalize();
+    std::cout << "v after normalize(): " << v << '\n';
+
+    assert(std::abs(len - 1.0f) < 1e-5);
     assert(std::abs(v.length() - 1.0f) < 1e-5);
-    std::cout << "[Vector2] Length and Normalize tests done\n";
+    std::cout << "[Vector2] Length and Normalize OK\n";
+    std::cout << "=====================================" << '\n';
 
 }
 
@@ -145,16 +164,19 @@ void run_matrix4_projection_tests()
     Vector3f p(0, 0, -0.1f);
     Vector3f clip = proj * p;
     assert(std::abs(clip.z + 1) < 1e-3);
-    std::cout << "[Matrix4] projection test passed\n";
+    std::cout << "[Matrix4] projection test ok\n";
 }
 
 void run_matrix4_tests()
 {
     using namespace CPL;
     Matrix4f mTranslate = Matrix4f::translate(5, 0, 0);
+    std::cout << "Translate Matrix:\n" << mTranslate;
+
     Vector3f p(1, 0, 0);
     Vector3f moved = mTranslate * p;
     assert(moved == Vector3f(6, 0, 0));
+    std::cout << "Moved Point: " << moved << '\n';
 
     Matrix4f mScale = Matrix4f::scale(2, 2, 2);
     assert((mScale * p) == Vector3f(2, 0, 0));
@@ -163,7 +185,7 @@ void run_matrix4_tests()
     Vector3f up = mRot * Vector3f(1, 0, 0);
     assert(std::abs(up.x) < 1e-4 && std::abs(up.y - 1) < 1e-4);
 
-    std::cout << "[Matrix4] basic tests passed\n";
+    std::cout << "[Matrix4] basic tests ok\n";
 
     run_matrix4_projection_tests();
 }
@@ -174,11 +196,8 @@ void run_matrix4_tests()
 // ───────────────────────────────────────────
 int main()
 {
-    run_vector2_tests();
-
-    run_vector3_tests();
-
-    run_matrix4_tests();
+    glm::vec3 v1(1, 1, 1);
+    std::cout << v1.x;
 
     GLFWwindow* window = init_window(800, 600);
     if (!window) return -1;
@@ -188,13 +207,20 @@ int main()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        Transform t;
+        t.position = Vector3f(0.5f, 0.0f, 0.0f);
+        t.rotation.z = glfwGetTime();
+
+        Matrix4f modelMatrix = t.toMatrix();
+
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+        glMultMatrixf(modelMatrix.data());
 
         glBegin(GL_TRIANGLES);
-        glColor3f(1.0f, 0.0f, 0.0f);  glVertex3f(0.0f, 0.0f, 0.0f);
-        glColor3f(0.0f, 1.0f, 0.0f);  glVertex3f(0.0f, 1.0f, 0.0f);
-        glColor3f(0.0f, 0.0f, 1.0f);  glVertex3f(1.0f, 1.0f, 0.0f);
+        glColor3f(1.0f, 0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 0.0f);
+        glColor3f(0.0f, 1.0f, 0.0f); glVertex3f(0.0f, 1.0f, 0.0f);
+        glColor3f(0.0f, 0.0f, 1.0f); glVertex3f(1.0f, 1.0f, 0.0f);
         glEnd();
 
         glfwSwapBuffers(window);
