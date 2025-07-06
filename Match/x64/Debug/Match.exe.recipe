@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\CPL\GameEngine\Match\x64\Debug\Match.exe</FullPath>
+      <FullPath>D:\GitHub\VectorMatrix\x64\Debug\Match.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

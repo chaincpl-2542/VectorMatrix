@@ -24,7 +24,6 @@
     <ProjectGuid>{e16a9ea0-bc6b-4e2d-9f07-fa7ed9303547}</ProjectGuid>
     <RootNamespace>Match</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>VectorMatrix</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
