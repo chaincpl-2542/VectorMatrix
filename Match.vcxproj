@@ -132,14 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="vector2.cpp" />
-    <ClCompile Include="Vector3.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="matrix4.hpp" />
-    <ClInclude Include="transform.hpp" />
-    <ClInclude Include="vector2.hpp" />
-    <ClInclude Include="Vector3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

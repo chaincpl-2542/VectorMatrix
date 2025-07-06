@@ -5,18 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|D:\\GitHub\\VectorMatrix\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|D:\\GitHub\\VectorMatrix\\matrix4.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|solutionrelative:matrix4.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|D:\\GitHub\\VectorMatrix\\transform.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|solutionrelative:transform.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|D:\\GitHub\\VectorMatrix\\vector2.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E16A9EA0-BC6B-4E2D-9F07-FA7ED9303547}|Match.vcxproj|solutionrelative:vector2.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,48 +24,9 @@
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\GitHub\\VectorMatrix\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAMcAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-06T02:31:58.033Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "vector2.hpp",
-              "DocumentMoniker": "D:\\GitHub\\VectorMatrix\\vector2.hpp",
-              "RelativeDocumentMoniker": "vector2.hpp",
-              "ToolTip": "D:\\GitHub\\VectorMatrix\\vector2.hpp",
-              "RelativeToolTip": "vector2.hpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-06T02:26:47.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "transform.hpp",
-              "DocumentMoniker": "D:\\GitHub\\VectorMatrix\\transform.hpp",
-              "RelativeDocumentMoniker": "transform.hpp",
-              "ToolTip": "D:\\GitHub\\VectorMatrix\\transform.hpp",
-              "RelativeToolTip": "transform.hpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-06T03:13:13.718Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "matrix4.hpp",
-              "DocumentMoniker": "D:\\GitHub\\VectorMatrix\\matrix4.hpp",
-              "RelativeDocumentMoniker": "matrix4.hpp",
-              "ToolTip": "D:\\GitHub\\VectorMatrix\\matrix4.hpp",
-              "RelativeToolTip": "matrix4.hpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-06T02:40:13.349Z",
               "EditorCaption": ""
             }
           ]
